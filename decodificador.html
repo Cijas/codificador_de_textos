@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+
+<html lang="pt-br">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width" content="height-device-height">
+        <link rel="stylesheet" href="reset.css">
+       <link rel="stylesheet" href="style.css">
+
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat&amp;display=swap"
+         rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+         rel="stylesheet">
+
+        <title>Codificador de Texto - Challange ONE</title>
+    </head>    
+    <body>
+        <header class="caixa-header"> 
+            <h1><a href="https://www.alura.com.br"><img src="logo.png" alt="Logo da Alura"></a></h1>
+            <h2 class="titulo">Codificador de Textos</h2>
+        </header>
+
+        <main>
+            <div class="instrucoes">
+                <label for="lista-instrucoes">Instruções de como usar o encriptador de textos</label>
+                <ul class="lista-instrucoes">
+                    <li>Insira o texto a ser criptografado ou decriptografado no campo 
+                        onde contém o "Digite seu texto";</li>
+                    <li>Encriptografe ou decriptografe o texto usando os botões;</li>
+                    <li>Após criptografia, copie o texto usando o botão copiar para
+                        continuar a criptografar.
+                    </li>
+                </ol>
+            </div>
+            <div class="criptografia">
+                <textarea cols="50" rows="20" id="texto-entrada" required 
+                placeholder="Digite seu texto aqui"></textarea>
+                <textarea id="texto-saida" cols="50" rows="20" readonly></textarea>
+                <div class="botoes">
+                    <button type="button" class="encriptografar" onclick="encriptografar()">
+                    Encriptografar</button>
+                    <button type="button" class="decriptografar" onclick="decriptografar()">Decriptografar</button>
+                    <button type="button" class="copiar" onclick="copiar()">Copiar</button>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <div class="copyright">
+                <p>Copyright © 2022 All Rights Reserved</p>
+                <p>This product is protected by copyright and distributed under licenses
+                    restricting copying, distribution, and decompilation.</p>  
+                <p>Created by Lucas M. Marçal</p>
+            </div>
+        </footer>
+
+    </body>
+</html>
+
+<script>
+    //VARIÁVEL DOS BOTÕES E CHECKBOX E VALORES DOS RESPECTIVOS
+
+    var botaoEncriptografar = document.getElementsByClassName("encriptografar");
+    var botaoDecriptografar = document.getElementsByClassName("decriptografar");
+    var botaoCopiar = document.getElementsByClassName("copiar");
+    let codificado = {a:"ai", e:"enter", i:"imes", o:"ober", u:"ufat"};
+    let decodificado = {ai:"a", enter:"e", imes:"i", ober:"o", ufat:"u"};
+
+    //VARIÁVEL DA CAIXA DE TEXTO
+    let input = document.getElementById("texto-entrada");
+    let output = document.getElementById("texto-saida");
+   
+    //FUNÇÃO PARA LÓGICA DE BOTÕES
+    function encriptografar() {
+            let texto = input.value.replace(/a|e|i|o|u/g, function (criptografado){
+            return codificado[criptografado];})
+            output.value= texto;
+        }  
+        
+    function decriptografar() {
+            let texto = input.value.replace(/ai|enter|imes|ober|ufat/g, function (decriptografado){
+            return decodificado[decriptografado];})
+            output.value= "";
+            output.value= texto;  
+    }
+
+    function copiar() {
+            output.select();
+            document.execCommand("copy");
+            alert("Texto copiado");
+            input.value="";
+            output.value="";
+    }
+
+</script>
